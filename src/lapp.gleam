@@ -2,10 +2,10 @@ import gleam/dynamic/decode
 import gleam/int
 import gleam/list
 import lustre.{application, start}
-import lustre/attribute
+import lustre/attribute.{height, src, width}
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
-import lustre/element/html
+import lustre/element/html.{button, div, img, p, text}
 import lustre/event
 import rsvp
 
@@ -69,20 +69,20 @@ fn get_cat() -> Effect(Msg) {
 }
 
 fn view(model: Model) -> Element(Msg) {
-  html.div([], [
-    html.div([], [
-      html.button([event.on_click(UserClickedAddCat)], [html.text("Add cat")]),
-      html.p([], [html.text(int.to_string(model.total))]),
-      html.button([event.on_click(UserClickedRemoveCat)], [
-        html.text("Remove cat"),
+  div([], [
+    div([], [
+      button([event.on_click(UserClickedAddCat)], [text("Add cat")]),
+      p([], [text(int.to_string(model.total))]),
+      button([event.on_click(UserClickedRemoveCat)], [
+        text("Remove cat"),
       ]),
     ]),
-    html.div([], {
+    div([], {
       list.map(model.cats, fn(cat) {
-        html.img([
-          attribute.src(cat.url),
-          attribute.width(400),
-          attribute.height(400),
+        img([
+          src(cat.url),
+          width(400),
+          height(400),
         ])
       })
     }),
