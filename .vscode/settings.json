@@ -1,4 +1,6 @@
 {
     "github.gitProtocol": "ssh",
-    "remoteHub.gitProtocol": "ssh"
+    "remoteHub.gitProtocol": "ssh",
+    "traeai.enabled": false,
+    "traeai.suggestions.enabled": false
 }
