@@ -1,7 +1,7 @@
 import gleam/dynamic/decode
 import gleam/int
 import gleam/list
-import lustre.{application, start}
+import lustre as web
 import lustre/attribute.{height, src, width}
 import lustre/effect.{type Effect}
 import lustre/element.{type Element}
@@ -9,26 +9,12 @@ import lustre/element/html.{button, div, img, p, text}
 import lustre/event
 import rsvp
 
-pub fn main() {
-  let app = application(init, update, view)
-  let assert Ok(_) = app |> start("#app", Nil)
-  // let _ = app |> start("#app", Nil)
-
-  Nil
-}
-
 type Model {
   Model(total: Int, cats: List(Cat))
 }
 
 type Cat {
   Cat(id: String, url: String)
-}
-
-fn init(_args) -> #(Model, Effect(Msg)) {
-  let model = Model(total: 0, cats: [])
-
-  #(model, effect.none())
 }
 
 type Msg {
@@ -87,4 +73,18 @@ fn view(model: Model) -> Element(Msg) {
       })
     }),
   ])
+}
+
+fn init(_args) -> #(Model, Effect(Msg)) {
+  let model = Model(total: 0, cats: [])
+
+  #(model, effect.none())
+}
+
+pub fn main() {
+  let app = web.application(init, update, view)
+  let assert Ok(_) = app |> web.start("#app", Nil)
+  // let _ = app |> web.start("#app", Nil)
+
+  Nil
 }
