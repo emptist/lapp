@@ -59,17 +59,11 @@ fn view(model: Model) -> Element(Msg) {
     div([], [
       button([event.on_click(UserClickedAddCat)], [text("Add cat")]),
       p([], [text(int.to_string(model.total))]),
-      button([event.on_click(UserClickedRemoveCat)], [
-        text("Remove cat"),
-      ]),
+      button([event.on_click(UserClickedRemoveCat)], [text("Remove cat")]),
     ]),
     div([], {
       list.map(model.cats, fn(cat) {
-        img([
-          src(cat.url),
-          width(400),
-          height(400),
-        ])
+        img([src(cat.url), width(400), height(400)])
       })
     }),
   ])
